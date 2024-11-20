@@ -10,25 +10,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # used to cache dependencies with a timeout
+      # Get Date (updated to use output correctly)
       - name: Get Date
         id: get-date
         run: |
-          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-        shell: bash
-
+          echo "DATE=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
+          
       - name: Upload artifact
-  uses: actions/upload-artifact@v3
-  with:
-    name: my-artifact
-    path: ./path/to/artifact
-
-          key: ./path/to/artifact${{ hashFiles('./path/to/artifact') }} # Replace with your path
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ./path/to/artifact
+          key: ./path/to/artifact${{ hashFiles('./path/to/artifact') }}
 
       - uses: actions/cache@v2
         with:
           path: .buildozer
-          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
+          key: ${{ runner.os }}-${{ env.DATE }}-${{ hashFiles('buildozer.spec') }}
 
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
@@ -36,6 +34,13 @@ jobs:
         with:
           command: buildozer android debug
           buildozer_version: master
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: ${{ steps.buildozer.outputs.filename }}
+
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
