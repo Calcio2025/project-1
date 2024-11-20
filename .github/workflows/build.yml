@@ -28,7 +28,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.DATE }}-${{ hashFiles('buildozer.spec') }}
 
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v3
+        uses: ArtemSBulgakov/buildozer-action@v1  # Alterado para v1
         id: buildozer
         with:
           command: buildozer android debug
@@ -44,5 +44,6 @@ jobs:
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
+
 
 
