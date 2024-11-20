@@ -17,11 +17,13 @@ jobs:
           echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
         shell: bash
 
-      - name: Cache Buildozer global directory
-        uses: actions/cache@v2
-        with:
-          path: .buildozer_global
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
+      - name: Upload artifact
+  uses: actions/upload-artifact@v3
+  with:
+    name: my-artifact
+    path: ./path/to/artifact
+
+          key: ./path/to/artifact${{ hashFiles('./path/to/artifact') }} # Replace with your path
 
       - uses: actions/cache@v2
         with:
