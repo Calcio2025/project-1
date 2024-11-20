@@ -1,0 +1,162 @@
+JanelaGerenciadora:
+     JanelaPrincipal:
+     Janela1:
+     Janela2:
+
+<JanelaPrincipal>:
+     name: "janelaprincipal"
+
+     FloatLayout:
+          MDToolbar:
+               title: "[size=17][u][color=#b9ffe6]Conversor de Velocidade[/size][/u][/color]"
+               left_action_items: [["menu"]]
+               right_action_items: [["close-octagon", lambda x: app.fechar()]]
+               pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+               md_bg_color: app.theme_cls.primary_dark
+
+          Image:
+               source: 'Nonas.png'
+               allow_stretch: True
+               size_hint: 0.6, 0.7
+               pos_hint: {'center_x': 0.45, 'center_y': 0.55}
+
+          MDRaisedButton:
+               text: '[size=17]Converta km/h para m/s[/size]'
+               pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+               size_hint: 0.7, 0.1
+               md_bg_color: app.theme_cls.primary_dark
+               on_release:
+                    app.root.current = 'janela1'
+                    root.manager.transition.direction = 'left'
+
+          MDRaisedButton:
+               text: '[size=17]Converta m/s para km/h[/size]'
+               pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+               size_hint: 0.7, 0.1
+               md_bg_color: app.theme_cls.primary_dark
+               on_release:
+                    app.root.current = 'janela2'
+
+
+<Janela1>:
+     name: "janela1"
+
+     FloatLayout:
+
+          MDToolbar:
+               title: "[color=#8FBC8F]Converta km/h para m/s[/color]"
+               right_action_items: [["close-octagon", lambda x: app.fechar()]]
+               pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+               md_bg_color: app.theme_cls.primary_dark
+
+     MDBottomAppBar:
+          MDToolbar:
+               title: 'Menu Principal'
+               type: 'bottom'
+               icon: 'arrow-left-circle'
+               mode: 'end'
+               on_action_button:
+                    app.root.current = 'janelaprincipal'
+                    root.manager.transition.direction = 'right'
+                    root.limpar()
+               
+
+          MDTextButton:
+               text: 'Digite a velocidade em km/h:'
+               font_size: 30
+               pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+
+          TextInput:
+               id: caixa_texto
+               text: ''
+               multiline: False
+               pos_hint: {'center_x': 0.5, 'center_y': 0.64}
+               size_hint: 0.8, 0.1
+
+          MDFillRoundFlatButton:
+               text: '[size=17]Converter[/size]'
+               pos_hint: {'center_x': 0.8, 'center_y': 0.53}
+               size_hint: 0.2, 0.1
+               md_bg_color: app.theme_cls.primary_dark
+               on_press: root.calcular()
+
+          MDLabel:
+               id: resposta
+               text: ''
+               font_size: 65
+               halign: 'center'
+               color: '#fff00'
+               pos_hint: {'center_x': 0.5, 'center_y': 0.28}
+               
+            
+
+
+<Janela2>:
+     name: "janela2"
+     FloatLayout:
+
+          MDToolbar:
+               title: "[color=#8FBC8F]Converta m/s para km/h[/color]"
+               right_action_items: [["close-octagon", lambda x: app.fechar()]]
+               pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+               md_bg_color: app.theme_cls.primary_dark
+
+     MDBottomAppBar:
+          MDToolbar:
+               title: 'Menu Principal'
+               type: 'bottom'
+               icon: 'arrow-left-circle'
+               mode: 'end'
+               
+               
+
+          MDTextButton:
+               text: 'Digite a velocidade em m/s:'
+               font_size: 30
+               pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+
+          TextInput:
+               id: caixa_texto
+               text: ''
+               multiline: False
+               pos_hint: {'center_x': 0.5, 'center_y': 0.64}
+               size_hint: 0.8, 0.1
+
+          MDFillRoundFlatButton:
+               text: '[size=17]Converter[/size]'
+               pos_hint: {'center_x': 0.8, 'center_y': 0.53}
+               size_hint: 0.2, 0.1
+               md_bg_color: app.theme_cls.primary_dark
+
+          MDLabel:
+               id: resposta
+               text: ''
+               font_size: 65
+               halign: 'center'
+               color: '#fff00'
+               pos_hint: {'center_x': 0.5, 'center_y': 0.28}
+
+          Image:
+               source: 'Nonas.png'
+               allow_stretch: True
+               size_hint: 0.6, 0.7
+               pos_hint: {'center_x': 0.5, 'center_y': 0.50}
+
+          MDRaisedButton:
+               text: '[size=17]Converta km/h para m/s[/size]'
+               pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+               size_hint: 0.7, 0.1
+               md_bg_color: app.theme_cls.primary_dark
+
+          MDRaisedButton:
+               text: '[size=17]Converta m/s para km/h[/size]'
+               pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+               size_hint: 0.7, 0.1
+               md_bg_color: app.theme_cls.primary_dark
+
+
+
+
+
+
+
