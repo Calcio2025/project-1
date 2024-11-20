@@ -34,12 +34,15 @@ jobs:
           command: buildozer android debug
           buildozer_version: master
 
+      # Debug Build Output
+      - name: Debug Build Output
+        run: |
+          echo "Build output: ${{ steps.buildozer.outputs.filename }}"
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
 
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
 
